@@ -10,7 +10,7 @@ class Algorithm {
 
         println(arena)
 
-        val me = arena.state["https://kotlin-micronaut-d6kgk4yqeq-uc.a.run.app/"]
+        val me = arena.state["https://34.117.10.100.sslip.io/"]
             ?: arena.state["34.117.10.100.sslip.io"]
             ?: arena.state.values.random()
 
