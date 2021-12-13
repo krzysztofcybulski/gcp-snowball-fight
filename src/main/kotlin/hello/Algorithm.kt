@@ -24,17 +24,17 @@ class Algorithm {
 
         val isInFront = arena.state.values.any { it.x to it.y == front }
 
-        if (me.y < 5) {
-            return if(isInFront) "T" else if (me.direction == "S") "F" else "R"
+        if (me.y == 0) {
+            return if (me.direction == "S") "F" else "R"
         }
-        if (me.x < 5) {
-            return if(isInFront) "T" else if (me.direction == "E") "F" else "R"
+        if (me.x == 0) {
+            return if (me.direction == "E") "F" else "R"
         }
-        if (me.y > arena.dims[1] - 5) {
-            return if(isInFront) "T" else if (me.direction == "N") "F" else "R"
+        if (me.y == arena.dims[1] - 1) {
+            return if (me.direction == "N") "F" else "R"
         }
-        if (me.x > arena.dims[0] - 5) {
-            return if(isInFront) "T" else if (me.direction == "W") "F" else "R"
+        if (me.x == arena.dims[0] - 1) {
+            return if (me.direction == "W") "F" else "R"
         }
 
         val fields = when (me.direction) {
