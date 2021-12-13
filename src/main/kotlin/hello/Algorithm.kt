@@ -72,7 +72,7 @@ class Algorithm {
 
         println("Im on ${me.x} ${me.y}, attacking by $attackersPower")
 
-        if (attackersPower > 0) {
+        if (attackersPower > 0 && me.wasHit) {
             return if(isInFront) "L" else "F"
         }
 
