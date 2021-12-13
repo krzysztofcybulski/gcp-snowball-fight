@@ -35,6 +35,7 @@ fun main() {
                                 ctx.parse(fromJson(ArenaUpdate::class.java))
                                     .map(ArenaUpdate::arena)
                                     .map(algorithm::decide)
+                                    .mapError { "T" }
                                     .then(ctx::render)
                             }
                     }

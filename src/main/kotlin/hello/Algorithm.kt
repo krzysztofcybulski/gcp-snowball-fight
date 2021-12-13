@@ -1,17 +1,22 @@
 package hello
 
-class Algorithm {
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
-    private val stream = WriteCommittedStream()
+class Algorithm(
+    val stream: WriteCommittedStream = WriteCommittedStream()
+) {
+
+    private val LOGGER: Logger = LoggerFactory.getLogger(Algorithm::class.java)
+
     private val sequence = listOf("F", "L", "L", "L", "L")
 
     private var current = 0
 
     fun decide(arena: Arena): String {
 
-        stream.send(arena)
-
-        println(arena)
+//        stream.send(arena)
+//        (arena)
 
         val me = arena.state["https://34.117.10.100.sslip.io/"]
             ?: arena.state["34.117.10.100.sslip.io"]
@@ -73,9 +78,9 @@ class Algorithm {
 
         val attackersPower = arena.state.values.filter { it.x to it.y in attackers }.size
 
-        println("Im on ${me.x} ${me.y}, attacking by $attackersPower")
+        LOGGER.info("Im on ${me.x} ${me.y}, attacking by $attackersPower")
 
-        if (attackersPower > 0 && me.wasHit) {
+        if (attackersPower > 0) {
             return if(isInFront) "L" else "F"
         }
 
