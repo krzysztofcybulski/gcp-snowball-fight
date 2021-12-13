@@ -9,8 +9,6 @@ class Algorithm(
 
     private val LOGGER: Logger = LoggerFactory.getLogger(Algorithm::class.java)
 
-    private val sequence = listOf("F", "L", "L", "L", "L")
-
     private var current = 0
 
     fun decide(arena: Arena): String {
@@ -103,7 +101,7 @@ class Algorithm(
             }
         }
 
-        return sequence[current++ % sequence.size]
+        return "F"
     }
 
 }
