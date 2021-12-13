@@ -2,11 +2,14 @@ package hello
 
 class Algorithm {
 
+    private val stream = WriteCommittedStream()
     private val sequence = listOf("F", "L", "L", "L", "L")
 
     private var current = 0
 
     fun decide(arena: Arena): String {
+
+        stream.send(arena)
 
         println(arena)
 

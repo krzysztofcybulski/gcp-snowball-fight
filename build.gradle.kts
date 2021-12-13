@@ -26,6 +26,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.2")
     implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("com.google.cloud:google-cloud-bigquerystorage:2.7.0")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7")
 }
