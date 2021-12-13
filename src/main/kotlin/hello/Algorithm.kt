@@ -68,13 +68,16 @@ class Algorithm(
             me.x - 3 to me.y
         )
 
-        val allAttackers = arena.state.values.filter { it.x to it.y in attackers }
+        val allAttackers: Set<PlayerState> = arena.state.values.filter { it.x to it.y in attackers }
             .filter {
                 it.x > me.x && it.direction == "W" ||
                 it.x < me.x && it.direction == "E" ||
                 it.y > me.y && it.direction == "N" ||
                 it.y < me.y && it.direction == "S"
             }
+            .toSet()
+
+        val victims = arena.state.values.filter { it.x to it.y in attackers } - allAttackers
 
         val attackersPower = allAttackers.size
 
@@ -90,6 +93,15 @@ class Algorithm(
 
         if (arena.state.values.find { it.x to it.y in fields } != null)
             return "T"
+
+        if(victims.isNotEmpty()) {
+            when(me.direction) {
+                "N" -> if(victims.any { it.x > me.x }) return "R" else if(victims.any { it.x < me.x }) return "L"
+                "S" -> if(victims.any { it.x > me.x }) return "L" else if(victims.any { it.x < me.x }) return "R"
+                "W" -> if(victims.any { it.y > me.y }) return "R" else if(victims.any { it.y < me.y }) return "L"
+                "E" -> if(victims.any { it.y > me.y }) return "L" else if(victims.any { it.y < me.y }) return "R"
+            }
+        }
 
         return sequence[current++ % sequence.size]
     }
