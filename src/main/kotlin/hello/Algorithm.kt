@@ -58,7 +58,7 @@ class Algorithm {
             me.x - 1 to me.y,
             me.x - 2 to me.y,
             me.x - 3 to me.y
-        ) - fields.toSet()
+        )
 
         arena.state.values.filter { it.x to it.y in attackers }
             .filter {
