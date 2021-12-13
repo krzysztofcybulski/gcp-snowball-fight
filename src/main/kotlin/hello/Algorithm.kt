@@ -68,7 +68,7 @@ class Algorithm(
             me.x - 3 to me.y
         )
 
-        arena.state.values.filter { it.x to it.y in attackers }
+        val allAttackers = arena.state.values.filter { it.x to it.y in attackers }
             .filter {
                 it.x > me.x && it.direction == "W" ||
                 it.x < me.x && it.direction == "E" ||
@@ -76,9 +76,13 @@ class Algorithm(
                 it.y < me.y && it.direction == "S"
             }
 
-        val attackersPower = arena.state.values.filter { it.x to it.y in attackers }.size
+        val attackersPower = allAttackers.size
 
-        LOGGER.info("Im on ${me.x} ${me.y}, attacking by $attackersPower")
+        LOGGER.info("Im on ${me.x} ${me.y}, attacked by $attackersPower")
+
+        if(attackersPower == 1 && allAttackers.first().direction.isOppositeTo(me.direction)) {
+            return if(allAttackers.first().score < me.score) "T" else "L"
+        }
 
         if (attackersPower > 0) {
             return if(isInFront) "L" else "F"
@@ -91,3 +95,11 @@ class Algorithm(
     }
 
 }
+
+private fun String.isOppositeTo(direction: String) = when(this) {
+    "W" -> "E"
+    "E" -> "W"
+    "N" -> "S"
+    "S" -> "N"
+    else -> "X"
+} == direction
